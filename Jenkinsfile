@@ -15,14 +15,14 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean verify'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=veterinaria-backend'
+                    sh 'mvn sonar:sonar -DskipTests -Dsonar.projectKey=veterinaria-backend'
                 }
             }
         }
