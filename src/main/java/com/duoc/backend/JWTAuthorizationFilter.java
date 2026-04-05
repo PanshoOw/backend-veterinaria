@@ -2,7 +2,6 @@ package com.duoc.backend;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.crypto.SecretKey;
 
@@ -54,13 +53,13 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
                         null,
                         authorities.stream()
                                 .map(SimpleGrantedAuthority::new)
-                                .collect(Collectors.toList())
+                                .toList()
                 );
 
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
 
-    private boolean isJWTValid(HttpServletRequest request, HttpServletResponse response) {
+    private boolean isJWTValid(HttpServletRequest request) {
         String authenticationHeader = request.getHeader(HEADER_AUTHORIZACION_KEY);
         return authenticationHeader != null
                 && authenticationHeader.startsWith(TOKEN_BEARER_PREFIX);
@@ -74,7 +73,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         try {
-            if (isJWTValid(request, response)) {
+            if (isJWTValid(request)) {
                 Claims claims = setSigningKey(request);
 
                 if (claims.get("authorities") != null) {
