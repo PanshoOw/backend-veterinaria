@@ -1,11 +1,14 @@
 package com.duoc.backend;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+
 public class Constants {
+
+    private Constants() {
+    }
 
     // Spring Security
     public static final String LOGIN_URL = "/login";
@@ -14,7 +17,6 @@ public class Constants {
 
     // JWT
     public static final String ISSUER_INFO = "https://www.duocuc.cl/";
-    public static final String SUPER_SECRET_KEY = "ZnJhc2VzbGFyZ2FzcGFyYWNvbG9jYXJjb21vY2xhdmVlbnVucHJvamVjdG9kZWVtZXBsb3BhcmFqd3Rjb25zcHJpbmdzZWN1cml0eQ==bWlwcnVlYmFkZWVqbXBsb3BhcmFiYXNlNjQ=";
     public static final long TOKEN_EXPIRATION_TIME = 864_000_000; // 1 day
 
     public static Key getSigningKeyB64(String secret) {
