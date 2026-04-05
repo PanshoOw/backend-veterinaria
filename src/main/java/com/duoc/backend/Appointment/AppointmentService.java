@@ -1,13 +1,15 @@
 package com.duoc.backend.Appointment;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AppointmentService {
 
-    @Autowired
     private AppointmentRepository appointmentRepository;
+
+    public AppointmentService(AppointmentRepository appointmentRepository) {
+        this.appointmentRepository = appointmentRepository;
+    }
 
     public Iterable<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
